@@ -1,0 +1,3 @@
+gym==0.10.5
+numpy-stl
+gast==0.2.2
