@@ -1,7 +1,9 @@
 # Structured Attentive Reasoning Network (SARNET)
 
 Theano based abstractions from [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/pdf/1706.02275.pdf).
+
 Segment Tree for PER [OpenAI Baselines](https://github.com/openai/baselines/blob/master/baselines/deepq/replay_buffer.py)
+
 Attention Based Abstractions/Operations [MAC Network](https://github.com/stanfordnlp/mac-network/blob/master/ops.py)
 
 ## Installation
@@ -31,6 +33,10 @@ agents are the default agents for fully-cooperative environments, i.e. good agen
 - **IC3Net**: `--adv-test IC3NET` or `--good-test IC3NET`
 
 - **MADDPG**: `--adv-test DDPG` or `--good-test DDPG`
+
+To use MAAC-type Critic
+
+- **MAAC**: `--adv-critic-model MAAC` or `--gd-critic-model MAAC`
 
 
 ## Environments 
