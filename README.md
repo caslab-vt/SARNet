@@ -1,4 +1,4 @@
-# Structured Attentive Reasoning Network (SARNET)
+# Structured Attentive Reasoning Network (SARNet)
 
 Theano based abstractions from [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/pdf/1706.02275.pdf).
 
