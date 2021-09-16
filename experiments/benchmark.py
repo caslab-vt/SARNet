@@ -23,8 +23,8 @@ def simple_spread(arglist, bench_val):
                     if agnt_idx < arglist.num_adversaries:
                         try:
                             collision_ep += int(stps_bench['collisions'][0])
-                            reward_ep += int(stps_bench['rew'][0])
-                            min_dist_ep += int(stps_bench['min_dists'][0])
+                            reward_ep += stps_bench['rew'][0]
+                            min_dist_ep += stps_bench['min_dists'][0]
                             occ_land_ep += int(stps_bench['occ_land'][0])
                         except:
                             continue

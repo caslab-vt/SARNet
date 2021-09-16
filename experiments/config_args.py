@@ -33,7 +33,7 @@ def parse_args():
     parser.add_argument("--policy-grad", type=str, default="maddpg", choices=["maddpg", "reinforce"], help="policy for good agents")
     parser.add_argument("--random-seed", type=int, default=123, help="Random Seed")
     parser.add_argument("--buffer-size", type=int, default=1e5, help="Replay buffer size")
-    parser.add_argument("--PER-sampling", action="store_true", default=False, help="use Prioritized Experience Replay")
+    parser.add_argument("--PER-sampling", action="store_true", default=True, help="use Prioritized Experience Replay")
     parser.add_argument("--alpha", type=int, default=0.8, help="How much prioritization is used")
 
     # Test Parameters
@@ -95,9 +95,6 @@ def parse_args():
     parser.add_argument("--FeedInteractions", action="store_true", default=True, help="Perform a linear projection after computing (mem * val) + val")
     parser.add_argument("--TwoLayerEncodeSarnet", action="store_true", default=True, help="Use a GRU for action proj")
     parser.add_argument("--SARplusIC3", action="store_true", default=False, help="Use IC3Net as part of SARNET")
-
-    # MAAC parameters
-
 
     # TARMAC parameters
     parser.add_argument("--TwoLayerEncodeTarmac", action="store_true", default=False, help="Perform a linear projection after computing (mem * val) + val")
