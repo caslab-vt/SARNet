@@ -142,7 +142,7 @@ class CommAgentTrainerVPG(MAgentTrainer):
 
             # wrap parameters in distribution and sample
             act_pd = act_pdtype_n[self.p_index].pdfromflat(p)
-            act_soft_sample = act_pd.sample(noise=False)
+            act_soft_sample = act_pd.sample(noise=False, onehot=True)
             # print(act_soft_sample)
             act_onehot = tf.multinomial(act_soft_sample[-1,:,:], 1)
             # print(act_onehot)
@@ -240,8 +240,8 @@ class CommAgentTrainerVPG(MAgentTrainer):
         # Returns is of the form [trajlen, dim]
         # We need first indexes as agents for easier data manipulation
         # returns = np.stack(returns, axis=0)
-
         train_input = self.prep_input(obs_n_buffer, h_n_buffer, c_n_buffer, memory_n_buffer)
+        #for i in range(5):
         _ = self.v_train(*(train_input + [returns]))
         _ = self.p_train(*(train_input + [action_n_buffer[self.p_index]] + [returns]))
 
