@@ -237,11 +237,13 @@ class SoftCategoricalPd(Pd):
         z0 = U.sum(ea0, axis=1, keepdims=True)
         p0 = ea0 / z0
         return U.sum(p0 * (tf.log(z0) - a0), axis=1)
-    def sample(self, noise=True):
+    def sample(self, noise=True, onehot=False):
         if noise:
             u = tf.random.uniform(tf.shape(self.logits))
             sample = U.softmax(self.logits - tf.math.log(-tf.math.log(u)), axis=-1)
             return sample
+        elif onehot:
+            return U.log_softmax(self.logits, axis=-1)
         else:
             return U.softmax(self.logits, axis=-1)
     @classmethod

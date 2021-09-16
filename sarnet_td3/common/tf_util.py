@@ -23,6 +23,8 @@ def argmax(x, axis=None):
     return tf.argmax(x, axis=axis)
 def softmax(x, axis=None):
     return tf.nn.softmax(x, axis=axis)
+def log_softmax(x, axis=None):
+    return tf.nn.log_softmax(x, axis=axis)
 
 # ================================================================
 # Misc

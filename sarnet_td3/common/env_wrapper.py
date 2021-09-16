@@ -105,3 +105,5 @@ class GymWrapper(object):
             return self.env.stat
         else:
             return dict()
+    def seed(self, x):
+        return

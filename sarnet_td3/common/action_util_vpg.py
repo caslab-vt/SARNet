@@ -20,6 +20,7 @@ class ActionOPVPG(object):
         self.is_train = is_train
         self.episode_step = 0
         self.train_step = 0
+        self.train_epoch = 0
         self.save_rate = self.args.max_episode_len * 10
         if self.args.restore:
             self.train_step = int(args.policy_file)
@@ -108,6 +109,7 @@ class ActionOPVPG(object):
 
     def update_states(self):
         if self.terminal:
+
             self.episode_step = 0
             self.reset_states()
         else:
@@ -206,7 +208,7 @@ class ActionOPVPG(object):
         self.c_n_t = self.new_c_n_init
         # Communication
         self.memory_n_t = self.new_memory_n_init
-        epoch = int(self.train_step / self.args.max_episode_len)
+        epoch = int((self.train_step / self.args.max_episode_len) // 10) # 10 is the number of updates before an epoch is consumed
         self.obs_n_t = self.env_proc.reset(epoch)
         # Reward
         # self.train_thread[self.cpu_rew_thread].input_queue.put(("reset_rew_info", 0, None))
