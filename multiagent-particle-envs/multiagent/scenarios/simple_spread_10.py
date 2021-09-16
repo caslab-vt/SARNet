@@ -34,7 +34,7 @@ class Scenario(BaseScenario):
             landmark.movable = False
             landmark.size = 0.05 / (num_landmarks / 6)
 
-        self.occ_land_dist = world.agents[0].size + world.landmarks[0].size
+        self.occ_land_dist = (world.agents[0].size - world.landmarks[0].size) / 2
         self.reset_world(world)
         return world
 
@@ -62,7 +62,7 @@ class Scenario(BaseScenario):
 
         dists = [np.sqrt(np.sum(np.square(agent.state.p_pos - l.state.p_pos))) for l in world.landmarks]
         rew -= min(dists)
-        if min(dists) < 0.1:
+        if min(dists) < self.occ_land_dist:
             occupied_landmarks += 1
 
         if agent.collide:
@@ -91,8 +91,8 @@ class Scenario(BaseScenario):
         rew = 0
         dists = [np.sqrt(np.sum(np.square(agent.state.p_pos - l.state.p_pos))) for l in world.landmarks]
         rew -= min(dists)
-        if not min(dists) < self.occ_land_dist:
-            rew -= 1
+        if min(dists) < self.occ_land_dist:
+            rew += 1
 
         if agent.collide:
             for a in world.agents:

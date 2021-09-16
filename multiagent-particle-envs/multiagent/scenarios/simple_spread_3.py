@@ -4,9 +4,10 @@ from multiagent.scenario import BaseScenario
 
 
 class Scenario(BaseScenario):
-    def make_world(self):
+    def make_world(self, args=None):
         world = World()
         # set any world properties first
+        self.args = args
         world.dim_c = 2
         num_agents = 3
         num_landmarks = 3
@@ -33,7 +34,7 @@ class Scenario(BaseScenario):
             landmark.movable = False
             landmark.size = 0.05 / (num_landmarks / 3)
 
-        self.occ_land_dist = world.agents[0].size + world.landmarks[0].size
+        self.occ_land_dist = (world.agents[0].size - world.landmarks[0].size) / 2
         self.reset_world(world)
         return world
 
@@ -61,15 +62,8 @@ class Scenario(BaseScenario):
 
         dists = [np.sqrt(np.sum(np.square(agent.state.p_pos - l.state.p_pos))) for l in world.landmarks]
         rew -= min(dists)
-        if min(dists) < 0.1:
+        if min(dists) < self.occ_land_dist:
             occupied_landmarks += 1
-
-        # for l in world.landmarks:
-        #     dists = [np.sqrt(np.sum(np.square(a.state.p_pos - l.state.p_pos))) for a in world.agents]
-        #     min_dists += min(dists)
-        #     rew -= min(dists)
-        #     if min(dists) < 0.1:
-        #         occupied_landmarks += 1
 
         if agent.collide:
             for a in world.agents:
@@ -77,6 +71,7 @@ class Scenario(BaseScenario):
                     if self.is_collision(a, agent):
                         rew -= 1
                         collisions += 1
+
         info = {'success': [], 'collisions': [], 'rew': [], 'min_dists': [], 'occ_land': []}
         info['collisions'].append(collisions)
         info['occ_land'].append(occupied_landmarks)
@@ -96,8 +91,8 @@ class Scenario(BaseScenario):
         rew = 0
         dists = [np.sqrt(np.sum(np.square(agent.state.p_pos - l.state.p_pos))) for l in world.landmarks]
         rew -= min(dists)
-        if not min(dists) < self.occ_land_dist:
-            rew -= 1
+        if min(dists) < self.occ_land_dist:
+            rew += 1
 
         if agent.collide:
             for a in world.agents:
