@@ -2,6 +2,7 @@ import pickle
 import numpy as np
 import matplotlib as mpl
 mpl.use('pdf')
+import os
 
 from experiments.config_args import parse_args
 
@@ -84,14 +85,14 @@ def simple_tag(arglist, bench_val):
     save_info_dir = './exp_data/' + arglist.exp_name + '/' + arglist.exp_itr + '/' + arglist.benchmark_dir + '/' + arglist.exp_name + '.txt'
     with open(save_info_dir, 'w') as bench_file:
         bench_file.write("Model Name: %s" % arglist + "\n\n")
-        bench_file.write("Average Collisions: %f, Std Collisions: %f".format(collision_mn, collision_var ))
+        bench_file.write("Average Collisions: {}, Std Collisions: {}".format(collision_mn, collision_var ))
 
 
 def simple_adv(arglist):
     exp_name = 'PD5'
     arch_name = 'IC3'
     bench_name = 'bench3'
-    bench_file = './exp_data/' + exp_name + '/' + arch_name + '/' + bench_name + '/' + arch_name + '-' + exp_name + '.pkl'
+    bench_file = os.path.join(dirname, 'exp_data/' + arglist.exp_name + '/' + arglist.exp_itr + '/' + arglist.benchmark_dir + '/' + arglist.exp_name + '.txt')
     bench_load = open(bench_file, 'rb')
     bench_val = pickle.load(bench_load)
     bench_load.close()
@@ -140,29 +141,33 @@ def simple_adv(arglist):
     success_gd_ep_std = np.std(agnt_gd_success)
     success_adv_ep_mn = np.mean(agnt_adv_success)
     success_adv_ep_std = np.std(agnt_adv_success)
-    print("Average Adv Success: %f, Std Adv Success: %f".format(success_adv_ep_mn, success_adv_ep_std))
-    print("Average Good Success: %f, Std Good Success: %f".format(success_gd_ep_mn, success_gd_ep_std))
+    print("Average Adv Success: {}, Std Adv Success: {}".format(success_adv_ep_mn, success_adv_ep_std))
+    print("Average Good Success: {}, Std Good Success: {}".format(success_gd_ep_mn, success_gd_ep_std))
     save_info_dir = './exp_data/' + '/' + exp_name + '/' + arch_name + '/' + bench_name + '/' + arch_name + '-' + exp_name + '.txt'
     # save_info_dir = './exp_data/' + arglist.exp_name + '/' + arglist.exp_itr + '/' + arglist.benchmark_dir + '/' + arglist.exp_name + '.txt'
     with open(save_info_dir, 'w') as bench_file:
         bench_file.write("Model Name: %s" % arglist + "\n\n")
-        bench_file.write("Average Adv Success: %f, Std Adv Success: %f".format(success_adv_ep_mn, success_adv_ep_std))
-        bench_file.write("Average Good Success: %f, Std Good Success: %f".format(success_gd_ep_mn, success_gd_ep_std))
+        bench_file.write("Average Adv Success: {}, Std Adv Success: {}".format(success_adv_ep_mn, success_adv_ep_std))
+        bench_file.write("Average Good Success: {}, Std Good Success: {}".format(success_gd_ep_mn, success_gd_ep_std))
 
 
 def traffic_junction(arglist, bench_val):
     success_rate = 0
     mean_success_rate = np.mean(bench_val)
     std_success_rate = np.std(bench_val)
-    print("Average Success Rate: %f, Std. Success Rate: %f".format(mean_success_rate, std_success_rate))
-    save_info_dir = './exp_data/' + arglist.exp_name + '/' + arglist.exp_itr + '/' + arglist.benchmark_dir + '/' + arglist.exp_name + '.txt'
+    success_rate_ep = np.concatenate(bench_val)
+    success_rate_ep = np.count_nonzero(success_rate_ep == arglist.max_episode_len) / len(success_rate_ep)
+    print("Average Success Rate: {}, Std. Success Rate: {}".format(mean_success_rate, std_success_rate))
+    dirname = os.path.dirname(__file__)
+    save_info_dir = os.path.join(dirname, 'exp_data/' + arglist.exp_name + '/' + arglist.exp_itr + '/' + arglist.benchmark_dir + '/' + arglist.exp_name + '.txt')
     with open(save_info_dir, 'w') as bench_file:
         bench_file.write("Model Name: %s" % arglist + "\n\n")
-        bench_file.write("Average Success Rate: %f, Std. Success Rate: %f".format(mean_success_rate, std_success_rate))
+        bench_file.write("Average Success Rate: {}, Std. Success Rate: {}, Flawless Episodes: {}".format(mean_success_rate, std_success_rate, success_rate_ep))
 
 
 def benchmark(arglist):
-    bench_file = './exp_data/' + arglist.exp_name + '/' + arglist.exp_itr + '/' + arglist.benchmark_dir + '/' + arglist.exp_name + '.pkl'
+    dirname = os.path.dirname(__file__)
+    bench_file = os.path.join(dirname, 'exp_data/' + arglist.exp_name + '/' + arglist.exp_itr + '/' + arglist.benchmark_dir + '/' + arglist.exp_name + '.pkl')
     bench_load = open(bench_file, 'rb')
     bench_val = pickle.load(bench_load)
     bench_load.close()

@@ -27,13 +27,13 @@ def parse_args():
     parser.add_argument("--env-type", type=str, default="mpe", choices=["mpe", "ic3net"], help="name of the environment script")
     parser.add_argument("--scenario", type=str, default="simple_spread_10", help="name of the scenario script")
     parser.add_argument("--max-episode-len", type=int, default=100, help="maximum episode length")
-    parser.add_argument("--num-episodes", type=int, default=30000, help="number of episodes")
+    parser.add_argument("--num-episodes", type=int, default=24000, help="number of episodes")
     parser.add_argument("--num-total-frames", type=int, default=5e6, help="number of episodes")
     parser.add_argument("--num-adversaries", type=int, default=10, help="number of adversaries/agents")
     parser.add_argument("--policy-grad", type=str, default="maddpg", choices=["maddpg", "reinforce"], help="policy for good agents")
     parser.add_argument("--random-seed", type=int, default=123, help="Random Seed")
     parser.add_argument("--buffer-size", type=int, default=1e5, help="Replay buffer size")
-    parser.add_argument("--PER-sampling", action="store_true", default=True, help="use Prioritized Experience Replay")
+    parser.add_argument("--PER-sampling", action="store_true", default=False, help="use Prioritized Experience Replay")
     parser.add_argument("--alpha", type=int, default=0.8, help="How much prioritization is used")
 
     # Test Parameters
@@ -96,6 +96,9 @@ def parse_args():
     parser.add_argument("--TwoLayerEncodeSarnet", action="store_true", default=True, help="Use a GRU for action proj")
     parser.add_argument("--SARplusIC3", action="store_true", default=False, help="Use IC3Net as part of SARNET")
 
+    # MAAC parameters
+
+
     # TARMAC parameters
     parser.add_argument("--TwoLayerEncodeTarmac", action="store_true", default=False, help="Perform a linear projection after computing (mem * val) + val")
     parser.add_argument("--TARplusIC3", action="store_true", default=False, help="Use IC3Net as part of TARMAC")
@@ -127,9 +130,9 @@ def parse_args():
     parser.add_argument("---feedMemObsAction", action="store_true", default=True, help="Feed memory and observation for action projection")
 
     # Checkpointing
-    parser.add_argument("--exp-name", type=str, default="SAR-CN10", help="name of the experiment")
+    parser.add_argument("--exp-name", type=str, default="SAR-TJ6-AddRate", help="name of the experiment")
     parser.add_argument("--exp-itr", type=str, default="0", help="name of the experiment")
-    parser.add_argument("--policy-file", type=str, default="5000000", help="name of policy itr to use for benchmark")
+    parser.add_argument("--policy-file", type=str, default="642600", help="name of policy itr to use for benchmark")
     parser.add_argument("--save-dir", type=str, default="/policy/", help="directory in which training state and model should be saved")
     parser.add_argument("--save-rate", type=int, default=10000, help="save model once every time this many episodes are completed")
     parser.add_argument("--load-dir", type=str, default="", help="directory in which training state and model are loaded")
@@ -138,7 +141,7 @@ def parse_args():
     # Evaluation
     parser.add_argument("--restore", action="store_true", default=False)
     parser.add_argument("--display", action="store_true", default=False)
-    parser.add_argument("--benchmark", action="store_true", default=True)
+    parser.add_argument("--benchmark", action="store_true", default=False)
     parser.add_argument("--benchmark-iters", type=int, default=80000, help="number of iterations run for benchmarking")
     parser.add_argument("--benchmark-dir", type=str, default="bench-std", help="directory where benchmark data is saved")
     parser.add_argument("--plots-dir", type=str, default="learning_curves", help="directory where plot data is saved")

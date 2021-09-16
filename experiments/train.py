@@ -73,7 +73,8 @@ def train():
 
     # Load previous results, if necessary
     if args.load_dir == "":
-        args.load_dir = os.path.join('./exp_data/' + train_act_op.exp_name + '/' + train_act_op.exp_itr + args.save_dir + args.policy_file)
+        dirname = os.path.dirname(__file__)
+        args.load_dir = os.path.join(dirname, 'exp_data/' + train_act_op.exp_name + '/' + train_act_op.exp_itr + args.save_dir + args.policy_file)
     if args.display or args.restore or args.benchmark:
         print('Loading previous state...')
         U.load_state(args.load_dir)
