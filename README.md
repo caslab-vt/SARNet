@@ -1,6 +1,6 @@
 # Structured Attentive Reasoning Network (SARNet)
 
-Code repository for [Learning Multi-Agent Communication through Structured Attentive Reasoning](https://proceedings.neurips.cc/paper/2020/file/72ab54f9b8c11fae5b923d7f854ef06a-Paper.pdf)
+Code repository for [Learning Multi-Agent Communication through Structured Attentive Reasoning](https://proceedings.neurips.cc/paper/2020/hash/72ab54f9b8c11fae5b923d7f854ef06a-Abstract.html)
 
 Theano based abstractions from [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/pdf/1706.02275.pdf).
 
