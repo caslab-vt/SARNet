@@ -99,6 +99,6 @@ Additionally, in order to enable TD3, and recurrent trajectory updates use,
 Recurrent Importance Sampling is enabled by `--PER-sampling`
 
 ## Example Scripts
-- Cooperative Navigation with 3 SARNet Agents: `python train.py --policy-grad maddpg --env-type mpe --scenario simple_spread_3 --num_adversaries 3 --key-units 32 --value-units 32 --query-units 32 --len-traj-update 10 --td3 --PER-sampling --encoder-model LSTM --max-episode-len 100`
+- Cooperative Navigation with 6 SARNet Agents: `python train.py --policy-grad maddpg --env-type mpe --scenario simple_spread_6 --num_adversaries 6 --key-units 32 --value-units 32 --query-units 32 --len-traj-update 10 --td3 --PER-sampling --encoder-model LSTM --max-episode-len 100`
 
-- Traffic Junction with 6 SARNet Agents: `python train.py --policy-grad reinforce --env-type ic3net --scenario traffic_junction --num_adversaries 6 --key-units 32 --value-units 32 --query-units 32 --len-traj-update 10 --encoder-model LSTM --max-episode-len 20 --add_rate_min 0.3`
+- Traffic Junction with 6 SARNet Agents: `python train.py --env-type ic3net --scenario traffic_junction --policy-grad reinforce --num-adversaries 6 --adv-test SARNET --gpu-device 0 --exp-name SAR-TJ6-NoCurrLr --max-episode-len 20 --num-env 50 --dim 6 --add_rate_min 0.3 --add_rate_max 0.3 --curr_start 250 --curr_end 1250 --num-episodes 500000 --batch-size 500 --difficulty easy --vision 0 --batch-size 500`
