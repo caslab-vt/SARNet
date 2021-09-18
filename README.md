@@ -8,6 +8,24 @@ Segment Tree for PER [OpenAI Baselines](https://github.com/openai/baselines/blob
 
 Attention Based Abstractions/Operations [MAC Network](https://github.com/stanfordnlp/mac-network/blob/master/ops.py)
 
+## Cite
+
+If you use this code please consider citing SARNet
+
+```
+@inproceedings{NEURIPS2020_72ab54f9,
+ author = {Rangwala, Murtaza and Williams, Ryan},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {H. Larochelle and M. Ranzato and R. Hadsell and M. F. Balcan and H. Lin},
+ pages = {10088--10098},
+ publisher = {Curran Associates, Inc.},
+ title = {Learning Multi-Agent Communication through Structured Attentive Reasoning},
+ url = {https://proceedings.neurips.cc/paper/2020/file/72ab54f9b8c11fae5b923d7f854ef06a-Paper.pdf},
+ volume = {33},
+ year = {2020}
+}
+```
+
 ## Installation
 
 - To install, `cd` into the root directory and type `pip install -e .`
@@ -84,4 +102,3 @@ Recurrent Importance Sampling is enabled by `--PER-sampling`
 - Cooperative Navigation with 3 SARNet Agents: `python train.py --policy-grad maddpg --env-type mpe --scenario simple_spread_3 --num_adversaries 3 --key-units 32 --value-units 32 --query-units 32 --len-traj-update 10 --td3 --PER-sampling --encoder-model LSTM --max-episode-len 100`
 
 - Traffic Junction with 6 SARNet Agents: `python train.py --policy-grad reinforce --env-type ic3net --scenario traffic_junction --num_adversaries 6 --key-units 32 --value-units 32 --query-units 32 --len-traj-update 10 --encoder-model LSTM --max-episode-len 20 --add_rate_min 0.3`
-
