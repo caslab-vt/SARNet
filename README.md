@@ -2,12 +2,6 @@
 
 Code repository for [Learning Multi-Agent Communication through Structured Attentive Reasoning](https://proceedings.neurips.cc/paper/2020/hash/72ab54f9b8c11fae5b923d7f854ef06a-Abstract.html)
 
-Theano based abstractions from [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/pdf/1706.02275.pdf).
-
-Segment Tree for PER [OpenAI Baselines](https://github.com/openai/baselines/blob/master/baselines/deepq/replay_buffer.py)
-
-Attention Based Abstractions/Operations [MAC Network](https://github.com/stanfordnlp/mac-network/blob/master/ops.py)
-
 ## Cite
 
 If you use this code please consider citing SARNet
@@ -102,3 +96,12 @@ Recurrent Importance Sampling is enabled by `--PER-sampling`
 - Cooperative Navigation with 6 SARNet Agents: `python train.py --policy-grad maddpg --env-type mpe --scenario simple_spread_6 --num_adversaries 6 --key-units 32 --value-units 32 --query-units 32 --len-traj-update 10 --td3 --PER-sampling --encoder-model LSTM --max-episode-len 100`
 
 - Traffic Junction with 6 SARNet Agents: `python train.py --env-type ic3net --scenario traffic_junction --policy-grad reinforce --num-adversaries 6 --adv-test SARNET --gpu-device 0 --exp-name SAR-TJ6-NoCurrLr --max-episode-len 20 --num-env 50 --dim 6 --add_rate_min 0.3 --add_rate_max 0.3 --curr_start 250 --curr_end 1250 --num-episodes 500000 --batch-size 500 --difficulty easy --vision 0 --batch-size 500`
+
+## References
+
+Theano based abstractions from [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/pdf/1706.02275.pdf).
+
+Segment Tree for PER [OpenAI Baselines](https://github.com/openai/baselines/blob/master/baselines/deepq/replay_buffer.py)
+
+Attention Based Abstractions/Operations [MAC Network](https://github.com/stanfordnlp/mac-network/blob/master/ops.py)
+
