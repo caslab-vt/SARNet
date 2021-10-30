@@ -7,7 +7,7 @@ Code repository for [Learning Multi-Agent Communication through Structured Atten
 If you use this code please consider citing SARNet
 
 ```
-@inproceedings{NEURIPS2020_72ab54f9,
+@inproceedings{rangwala2020learning,
  author = {Rangwala, Murtaza and Williams, Ryan},
  booktitle = {Advances in Neural Information Processing Systems},
  pages = {10088--10098},
